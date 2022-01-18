@@ -17,12 +17,20 @@ import org.junit.*;
 
 public class MyArrayListHiddenTester {
 
+    static final int INVALID_INPUT = -1;
+    static final int DEFAULT_CAPACITY = 5;
+
+    private MyArrayList listDefaultCap, listInvalidIn, listExpanded;
+
     /**
      * This sets up the test fixture. JUnit invokes this method before
      * every testXXX method. The @Before tag tells JUnit to run this method
      * before each test */
     @Before
     public void setUp() throws Exception {
+        listDefaultCap = new MyArrayList(DEFAULT_CAPACITY);
+        listInvalidIn = new MyArrayList(INVALID_INPUT);
+        listExpanded = new MyArrayList()
         
     }
 
@@ -32,7 +40,7 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testConstructorInvalidArg(){
-        
+        assertEquals("Invalid input should return null", IllegalArgumentException, listInvalidIn);
     }
 
     /**
@@ -41,7 +49,7 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testConstructorNullArg(){
-        
+        assertEquals("Null input should return default capacity", listDefaultCap, null);
     }
 
     /**
@@ -50,7 +58,7 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testAppendAtCapacity(){
-        
+        assertEquals("append should expand arraylist capacity", , )
     }
 
     /**
