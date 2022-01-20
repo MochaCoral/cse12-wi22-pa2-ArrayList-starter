@@ -20,8 +20,9 @@ public class MyArrayListHiddenTester {
     static final int INVALID_INPUT = -1;
     static final int DEFAULT_CAPACITY = 5;
 
-    private MyArrayList listDefaultCap, listInvalidIn, listExpanded;
+    private MyArrayList listDefaultCap, listInvalidIn, listExpanded, listNullArg, listPrependNull;
     private boolean exceptionThrown;
+
 
     /**
      * This sets up the test fixture. JUnit invokes this method before
@@ -32,7 +33,10 @@ public class MyArrayListHiddenTester {
         listDefaultCap = new MyArrayList(DEFAULT_CAPACITY);
         listInvalidIn = new MyArrayList(INVALID_INPUT);
         listExpanded = new MyArrayList()
+        listPrependNull = new MyArrayList();
         exceptionThrown = false
+        
+
         
     }
 
@@ -42,7 +46,14 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testConstructorInvalidArg(){
-        assertEquals("Invalid input should return null", IllegalArgumentException, listInvalidIn);
+        boolean exceptionThrown = false;
+        try {
+            MyArrayList listInvalidIn = new MyArrayList(INVALID_INPUT);
+        }
+        catch (IllegalArgumentException e) {
+            exceptionThrown = true;
+        }
+        assertTrue("Exception thrown for invalid input", exceptionThrown);
     }
 
     /**
@@ -51,7 +62,8 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testConstructorNullArg(){
-        assertEquals("Null input should return default capacity", listDefaultCap, null);
+        listNullArg = new MyArrayList(null);
+        assertEquals("Null input should return default capacity", listDefaultCap, listNullArg);
     }
 
     /**
@@ -60,7 +72,7 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testAppendAtCapacity(){
-        assertEquals("append should expand arraylist capacity", , )
+        assertEquals("append should expand arraylist capacity", 10, listExpanded.size());
     }
 
     /**
@@ -70,7 +82,9 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testPrependNull(){
-        
+        assertEquals("check list size after prepend", , listPrependNull.data.size)
+        assertEquals("check list capacity after prepend")
+        assertEquals("check that first element is null", null, listPrependNull.data[0]);
     }
     
     /**
