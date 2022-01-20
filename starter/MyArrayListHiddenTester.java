@@ -1,9 +1,9 @@
 /**
  * TODO: Add your file header
- * Name:
- * ID:
- * Email:
- * Sources used: Put "None" if you did not have any external help
+ * Name: Morales, Kyle
+ * ID: A16162998
+ * Email: kmmorale@ucsd.edu
+ * Sources used: Piazza, Zybooks
  * Some example of sources used would be Tutors, Zybooks, and Lecture Slides
  * 
  * 2-4 sentence file description here
@@ -17,12 +17,26 @@ import org.junit.*;
 
 public class MyArrayListHiddenTester {
 
+    static final int INVALID_INPUT = -1;
+    static final int DEFAULT_CAPACITY = 5;
+
+    private MyArrayList listDefaultCap, listInvalidIn, listExpanded, listNullArg, listPrependNull;
+    private boolean exceptionThrown;
+
+
     /**
      * This sets up the test fixture. JUnit invokes this method before
      * every testXXX method. The @Before tag tells JUnit to run this method
      * before each test */
     @Before
     public void setUp() throws Exception {
+        listDefaultCap = new MyArrayList(DEFAULT_CAPACITY);
+        listInvalidIn = new MyArrayList(INVALID_INPUT);
+        listExpanded = new MyArrayList()
+        listPrependNull = new MyArrayList();
+        exceptionThrown = false
+        
+
         
     }
 
@@ -32,7 +46,14 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testConstructorInvalidArg(){
-        
+        boolean exceptionThrown = false;
+        try {
+            MyArrayList listInvalidIn = new MyArrayList(INVALID_INPUT);
+        }
+        catch (IllegalArgumentException e) {
+            exceptionThrown = true;
+        }
+        assertTrue("Exception thrown for invalid input", exceptionThrown);
     }
 
     /**
@@ -41,7 +62,8 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testConstructorNullArg(){
-        
+        listNullArg = new MyArrayList(null);
+        assertEquals("Null input should return default capacity", listDefaultCap, listNullArg);
     }
 
     /**
@@ -50,7 +72,7 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testAppendAtCapacity(){
-        
+        assertEquals("append should expand arraylist capacity", 10, listExpanded.size());
     }
 
     /**
@@ -60,7 +82,9 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testPrependNull(){
-        
+        assertEquals("check list size after prepend", , listPrependNull.data.size)
+        assertEquals("check list capacity after prepend")
+        assertEquals("check that first element is null", null, listPrependNull.data[0]);
     }
     
     /**
@@ -78,7 +102,11 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testInsertMultiple(){
-        
+        for(int i = 0; i < 1000; i++) {
+            listDefaultCap.insert(i, 1);
+        }
+        assertEquals("Check that size reflects insert", 1000, listDefaultCap.size);
+        assertEquals("Check that capacity reflects insert", 1280, listDefaultCap.getCapacity());
     }
 
     /**
@@ -86,6 +114,13 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testGetOutOfBound(){
+        try {
+            listDefaultCap.get(10);
+        }
+        catch(IndexOutOfBoundsException B){
+            exceptionThrown = True;
+        }
+        assertTrue("Check that an out of bounds exception is thrown (get)", exceptionThrown);
         
     }
 
@@ -94,6 +129,13 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testSetOutOfBound(){
+        try {
+            listDefaultCap.set(10, 69);
+        }
+        catch(IndexOutOfBoundsException B){
+            exceptionThrown = True;
+        }
+        assertTrue("Check that an out of bounds exception is thrown (set)", exceptionThrown); 
         
     }
 
@@ -103,6 +145,13 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testRemoveOutOfBound(){
+        try {
+            listDefaultCap.remove(10);
+        }
+        catch(indexOutOfBoundsException B) {
+            exceptionThrown = True;
+        }
+        assertTrue("Check that an out of bounds exception is thrown (remove)", exceptionThrown);
         
     }
 
@@ -112,6 +161,13 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testExpandCapacitySmaller(){
+        try {
+            listDefaultCap.expandCapacity(4);
+        }
+        catch(IllegalArgumentException) {
+            exceptionThrown = True;
+        }
+        assertTrue("Check that an illegal argument exception is thrown (expandCapacity)", exceptionThrown);
        
     }
 
@@ -121,7 +177,8 @@ public class MyArrayListHiddenTester {
      */
     @Test
     public void testExpandCapacityExplode(){
-        
+        listDefaultCap.expandCapacity(1080);
+        assertEquals("Check that capacity is set to requiredCapacity", 1080, listDefaultCap.getCapacity());
     }
 
 }
